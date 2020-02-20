@@ -12,22 +12,23 @@ def score_library(library):
     return float(float((n_puntos*(float(n_libros/ratio))))/signup)
 
 
-def score_library2(library, scanned):
+def score_library2(library, scanned, rem):
     n_puntos = 0
     set_libros = set(library['libros']) - set(scanned)
     n_libros = len(set_libros)
     ratio = float(library['libros_dia'])
     signup = float(library['signup'])
+    ships = float(library['libros_dia'])
     for libro in set_libros:
         n_puntos += float(libro[0])
 
-    return float(float((n_puntos * (float(n_libros / ratio)))) / signup)
+    return n_puntos*(rem-signup)*ships
 
 
-def librerias_ordenadas(libs):
+def librerias_ordenadas(libs, scanned, remain):
     lib_score = []
     for libreria in libs:
-        lib_score.append((score_library2(data['librerias'][libreria], book_scores), libreria))
+        lib_score.append((score_library2(data['librerias'][libreria], scanned, remain), libreria))
 
     return sorted(lib_score)
 
@@ -52,7 +53,7 @@ if __name__ == '__main__':
         list1 = []
         list2 = []
         set_libs = set(list(data['librerias']))
-        for library in librerias_ordenadas(set_libs):
+        for library in librerias_ordenadas(set_libs, scanned_books, rem_days):
             lib_score = []
             signup_time = data['librerias'][library[1]]['signup']
             n_ships = data['librerias'][library[1]]['libros_dia']
