@@ -9,20 +9,20 @@ def cargar_datos(fichero):
         datos["librerias"] = {}
         datos["scores"] = [int(x) for x in f.readline().split(" ")]
 
-        for libreria in range(numero_librerias):
+        for libreria in range(int(numero_librerias)):
             linea1 = [int(x) for x in f.readline().split(" ")]
             datos["librerias"][libreria] = {}
             datos["librerias"][libreria]["numero_libros"] = linea1[0]
             datos["librerias"][libreria]["signup"] = linea1[1]
             datos["librerias"][libreria]["libros_dia"] = linea1[2]
 
-            datos["librerias"][libreria]["libros"] = [int(x) for x in f.readline().split(" ")]
+            datos["librerias"][libreria]["libros"] = [(datos['scores'][int(x)],int(x)) for x in f.readline().split(" ")]
 
 
 
 
 
-    print(datos)
+    return datos
 
 
 if __name__ == '__main__':
