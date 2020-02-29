@@ -16,7 +16,7 @@ def cargar_datos(fichero):
             datos["librerias"][libreria]["signup"] = linea1[1]
             datos["librerias"][libreria]["libros_dia"] = linea1[2]
 
-            datos["librerias"][libreria]["libros"] = [(datos['scores'][int(x)],int(x)) for x in f.readline().split(" ")]
+            datos["librerias"][libreria]["libros"] = sorted([(datos['scores'][int(x)],int(x)) for x in f.readline().split(" ")], reverse=True)
 
 
 
